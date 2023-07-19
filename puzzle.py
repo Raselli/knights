@@ -15,7 +15,7 @@ knowledge0 = And(
     
     # A says "I am both a knight and a knave."
     Implication(AKnight, AKnave),
-
+    
     # Observations    
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
