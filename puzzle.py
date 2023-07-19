@@ -14,8 +14,9 @@ CKnave = Symbol("C is a Knave")
 knowledge0 = And(
     
     # A says "I am both a knight and a knave."
-    Implication(AKnight, AKnave),
-    
+    Implication(AKnight, And(AKnight, AKnave)),
+    Implication(AKnave, Not(And(AKnight, AKnave))),
+
     # Observations    
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
@@ -66,11 +67,11 @@ knowledge3 = And(
     
     # A says either "I am a knight." or "I am a knave.", but you don't know which.
     Implication(AKnight, Or(AKnight, AKnave)),
-    Implication(AKnave, Not(Or(AKnight, AKnave))),
+    Implication(AKnave, And(Not(AKnight), Not(AKnave))),
     
     # B says "A said 'I am a knave'."
-    Implication(AKnight, BKnave),
-    Implication(AKnave, Not(BKnave)),
+    Implication(BKnight, Or(Implication(AKnight, AKnave), Implication(AKnave, AKnave))),
+    Implication(BKnave, Or(Implication(AKnight, Not(AKnave)),Implication(AKnave, Not(AKnave)))),
     
     # B says "C is a knave."
     Implication(BKnight, CKnave), 
